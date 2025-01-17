@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import styles from './ToDo.module.css';
-import ToDoItem from './ToDoItem';
+import ToDoItem from './ToDoItem.tsx';
+
+// type ToDoProps = {
+//     name: string;
+//     isChecked: boolean; 
+//     _id: number;
+// };
 
 const ToDo = () => {
     const [name, setName] = useState('');
@@ -57,9 +63,14 @@ const ToDo = () => {
     }
 
     const toogleCheckedToDo = id => {
-        const newArray = [].concat(todos);
-        newArray[id].isChecked = !newArray[id].isChecked;
-        setTodos(newArray);
+        // const newArray: ToDoProps[] = [].concat(todos);
+        // newArray[id].isChecked = !newArray[id].isChecked;
+        // setTodos(newArray);
+        const newObject = todos.find(t => t._id === id)
+        if (newObject) {
+            newObject.isChecked = !newObject.isChecked;
+        }
+        setTodos(prev => [...prev]);
     }
 
     const onSortingByName = function (e) {
